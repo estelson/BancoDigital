@@ -53,7 +53,8 @@
                     android:drawableStart="@drawable/ic_email_login"
                     android:drawablePadding="16dp"
                     android:inputType="textEmailAddress"
-                    android:backgroundTint="@color/colorPrimary"/>
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +72,8 @@
                     android:drawableStart="@drawable/ic_celular_login"
                     android:drawablePadding="16dp"
                     android:inputType="number"
-                    android:backgroundTint="@color/colorPrimary"/>
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +91,8 @@
                     android:drawableStart="@drawable/ic_senha_login"
                     android:drawablePadding="16dp"
                     android:inputType="textPassword"
-                    android:backgroundTint="@color/colorPrimary"/>
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +110,8 @@
                     android:backgroundTint="@color/colorPrimary"
                     android:drawableStart="@drawable/ic_senha_login"
                     android:drawablePadding="16dp"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +124,8 @@
                 android:textSize="16sp"
                 android:background="@drawable/bg_btn"
                 android:textColor="@android:color/white"
-                android:text="Criar conta"/>
+                android:text="Criar conta"
+                android:onClick="validaDados"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
