@@ -10,8 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigital">
         <activity
+            android:name=".deposito.DepositoReciboActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".deposito.DepositoFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app.SplashActivity"
             android:exported="true"

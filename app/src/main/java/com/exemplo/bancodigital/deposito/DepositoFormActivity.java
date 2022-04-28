@@ -103,7 +103,12 @@ public class DepositoFormActivity extends AppCompatActivity {
                 usuario.setSaldo(usuario.getSaldo() + deposito.getValor());
                 usuario.atualizarSaldo();
 
-                // TODO: startActivity(new Intent(this, DepositoRecibo.class));
+                Intent intent = new Intent(this, DepositoReciboActivity.class);
+                intent.putExtra("idDeposito", deposito.getId());
+
+                startActivity(intent);
+
+                finish();
             } else {
                 progressBar.setVisibility(View.GONE);
 

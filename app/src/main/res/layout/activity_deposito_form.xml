@@ -60,7 +60,11 @@
                 android:layout_margin="24dp"
                 android:backgroundTint="@android:color/white"
                 android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
                 android:textColorHint="@color/colorTextHint"
+                android:theme="@style/Theme.EditText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
