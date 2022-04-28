@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.exemplo.bancodigital.MainActivity;
 import com.exemplo.bancodigital.R;
 import com.exemplo.bancodigital.autenticacao.LoginActivity;
 import com.exemplo.bancodigital.helper.FirebaseHelper;
