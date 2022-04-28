@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigital">
         <activity
+            android:name=".autenticacao.RecuperarContaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".autenticacao.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -21,7 +25,7 @@
         <activity
             android:name=".autenticacao.CadastroActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="false"

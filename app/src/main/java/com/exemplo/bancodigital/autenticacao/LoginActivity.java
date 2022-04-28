@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void recuperarConta(View view) {
-
+        startActivity(new Intent(this, RecuperarContaActivity.class));
     }
 
     private void iniciaComponentes() {
