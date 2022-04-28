@@ -1,5 +1,7 @@
 package com.exemplo.bancodigital.model;
 
+import com.exemplo.bancodigital.helper.FirebaseHelper;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 public class Usuario {
@@ -13,6 +15,15 @@ public class Usuario {
     private String senha;
 
     public Usuario() {
+    }
+
+    public void atualizarSaldo() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(getId())
+                .child("saldo");
+
+        usuarioRef.setValue(getSaldo());
     }
 
     public String getId() {
@@ -71,4 +82,5 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 }
