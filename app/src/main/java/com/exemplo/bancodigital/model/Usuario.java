@@ -1,5 +1,10 @@
 package com.exemplo.bancodigital.model;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
+
+import com.exemplo.bancodigital.app.MainActivity;
 import com.exemplo.bancodigital.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;

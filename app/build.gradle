@@ -53,4 +53,13 @@ dependencies {
     // a user.
     // https://github.com/BlacKCaT27/CurrencyEditText
     implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
+
+    // Possibilidade de adicionar controle de permissões personalizadas ao app
+    // https://github.com/ParkSangGwon/TedPermission
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0' // 2.2.3
+
+    // Image downloading and caching library for Android
+    // https://github.com/square/picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
