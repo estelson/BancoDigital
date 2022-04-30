@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.exemplo.bancodigital.R;
 import com.exemplo.bancodigital.deposito.DepositoFormActivity;
@@ -79,7 +80,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.minhaConta).setOnClickListener(v -> {
-            startActivity(new Intent(this, MinhaContaActivity.class));
+            if(usuario != null) {
+                Intent intent = new Intent(this, MinhaContaActivity.class);
+                intent.putExtra("usuario", usuario);
+
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Ainda estamos recuperando as informações", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
