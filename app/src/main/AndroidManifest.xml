@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.exemplo.bancodigital">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigital">
         <activity
+            android:name=".recarga.RecargaReciboActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".recarga.RecargaFormActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".usuario.MinhaContaActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.BancoDigital2"/>
+            android:theme="@style/Theme.BancoDigital2" />
         <activity
             android:name=".deposito.DepositoReciboActivity"
             android:exported="false"

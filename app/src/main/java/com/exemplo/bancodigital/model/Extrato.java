@@ -10,6 +10,7 @@ public class Extrato {
     private long data;
     private double valor;
     private String tipo;
+    private String numeroTelefone;
 
     public Extrato() {
         DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference();
@@ -55,4 +56,13 @@ public class Extrato {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public String getNumeroTelefone() {
+        return numeroTelefone;
+    }
+
+    public void setNumeroTelefone(String numeroTelefone) {
+        this.numeroTelefone = numeroTelefone;
+    }
+
 }
