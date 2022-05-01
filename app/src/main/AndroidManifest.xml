@@ -13,19 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigital">
         <activity
+            android:name=".transferencia.TransferenciaReciboActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BancoDigital2" />
+        <activity
             android:name=".transferencia.TransferenciaConfirmaActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.BancoDigital2"/>
+            android:theme="@style/Theme.BancoDigital2" />
         <activity
             android:name=".transferencia.TransferirUsuariosActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.BancoDigital2"/>
+            android:theme="@style/Theme.BancoDigital2" />
         <activity
             android:name=".transferencia.TransferenciaFormActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".recarga.RecargaReciboActivity"
             android:exported="false"

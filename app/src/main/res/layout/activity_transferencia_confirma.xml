@@ -107,6 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="24dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textAlignment="center"
                 android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -157,6 +159,7 @@
         android:text="Confirmar"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
+        android:onClick="confirmarTransferencia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

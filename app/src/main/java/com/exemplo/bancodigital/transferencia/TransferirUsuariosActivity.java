@@ -209,6 +209,8 @@ public class TransferirUsuariosActivity extends AppCompatActivity implements Usu
 
     @Override
     public void OnClickListener(Usuario usuario) {
+        transferencia.setIdUserDestino(usuario.getId());
+
         Intent intent = new Intent(this, TransferenciaConfirmaActivity.class);
         intent.putExtra("usuario", usuario);
         intent.putExtra("transferencia", transferencia);

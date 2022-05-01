@@ -59,6 +59,7 @@ public class TransferenciaFormActivity extends AppCompatActivity {
                 ocultarTeclado();
 
                 Transferencia transferencia = new Transferencia();
+                transferencia.setIdUserOrigem(usuario.getId());
                 transferencia.setValor(valorTransferencia);
 
                 Intent intent = new Intent(this, TransferirUsuariosActivity.class);

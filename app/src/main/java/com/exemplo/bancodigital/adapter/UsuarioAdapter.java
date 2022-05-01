@@ -66,7 +66,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.MyViewHo
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imagemUsuario = itemView.findViewById(R.id.imageUsuario);
+            imagemUsuario = itemView.findViewById(R.id.imagemUsuario);
             textUsuario = itemView.findViewById(R.id.textUsuario);
         }
     }
