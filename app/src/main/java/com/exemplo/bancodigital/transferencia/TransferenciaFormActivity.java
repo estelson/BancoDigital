@@ -77,60 +77,6 @@ public class TransferenciaFormActivity extends AppCompatActivity {
         }
     }
 
-    private void salvarExtrato(Double valorTransferencia) {
-        Extrato extrato = new Extrato();
-        extrato.setOperacao("TRANSFERÊNCIA");
-        extrato.setValor(valorTransferencia);
-        extrato.setTipo("SAÍDA");
-
-        DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference()
-                .child("extratos")
-                .child(FirebaseHelper.getIdFirebase())
-                .child(extrato.getId());
-
-        extratoRef.setValue(extrato).addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                DatabaseReference updateExtratoRef = extratoRef.child("data");
-                updateExtratoRef.setValue(ServerValue.TIMESTAMP);
-
-                //salvarTransferencia(extrato);
-            } else {
-                showDialog("Erro ao efetuar a transferência. Motivo: " + task.getException().getMessage());
-            }
-        });
-    }
-
-    private void salvarTransferencia(Extrato extrato) {
-        Deposito deposito = new Deposito();
-        deposito.setId(extrato.getId());
-        deposito.setValor(extrato.getValor());
-
-        DatabaseReference depositoRef = FirebaseHelper.getDatabaseReference()
-                .child("depositos")
-                .child(deposito.getId());
-
-        depositoRef.setValue(deposito).addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                DatabaseReference updateDepositoRef = depositoRef.child("data");
-                updateDepositoRef.setValue(ServerValue.TIMESTAMP);
-
-                usuario.setSaldo(usuario.getSaldo() + deposito.getValor());
-                usuario.atualizarSaldo();
-
-                Intent intent = new Intent(this, DepositoReciboActivity.class);
-                intent.putExtra("idDeposito", deposito.getId());
-
-                startActivity(intent);
-
-                finish();
-            } else {
-                progressBar.setVisibility(View.GONE);
-
-                showDialog("Erro ao efetuar o depósito. Motivo: " + task.getException().getMessage());
-            }
-        });
-    }
-
     private void recuperaUsuario() {
         DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
                 .child("usuarios")

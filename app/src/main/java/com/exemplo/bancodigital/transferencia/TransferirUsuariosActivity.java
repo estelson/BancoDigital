@@ -1,13 +1,8 @@
 package com.exemplo.bancodigital.transferencia;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -16,9 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.exemplo.bancodigital.R;
 import com.exemplo.bancodigital.adapter.UsuarioAdapter;
 import com.exemplo.bancodigital.helper.FirebaseHelper;
+import com.exemplo.bancodigital.model.Transferencia;
 import com.exemplo.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransferirUsuariosActivity extends AppCompatActivity {
+public class TransferirUsuariosActivity extends AppCompatActivity implements UsuarioAdapter.OnClick {
 
     private UsuarioAdapter usuarioAdapter;
     private final List<Usuario> usuarioList = new ArrayList<>();
@@ -44,6 +45,8 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
     private TextView textInfo;
 
     private ProgressBar progressBar;
+
+    private Transferencia transferencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,12 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
         configPesquisa();
 
         configCliques();
+
+        recuperarTransferência();
+    }
+
+    private void recuperarTransferência() {
+        transferencia = (Transferencia) getIntent().getSerializableExtra("transferencia");
     }
 
     private void configCliques() {
@@ -77,13 +86,13 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
 
     private void configPesquisa() {
         edtPesquisa.setOnEditorActionListener((v, actionId, event) -> {
-            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 ocultarTeclado();
 
                 progressBar.setVisibility(View.VISIBLE);
 
                 pesquisa = v.getText().toString();
-                if(!pesquisa.equals("")) {
+                if (!pesquisa.equals("")) {
                     configFiltro();
 
                     pesquisaUsuarios();
@@ -99,13 +108,13 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
     }
 
     private void pesquisaUsuarios() {
-        for(Usuario usuario : new ArrayList<>(usuarioList)) {
-            if(!usuario.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
+        for (Usuario usuario : new ArrayList<>(usuarioList)) {
+            if (!usuario.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
                 usuarioList.remove(usuario);
             }
         }
 
-        if(usuarioList.isEmpty()) {
+        if (usuarioList.isEmpty()) {
             textInfo.setText("Nenhum usuário encontrado com este nome");
         }
 
@@ -115,7 +124,7 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
     }
 
     private void configFiltro() {
-        if(!pesquisa.equals("")) {
+        if (!pesquisa.equals("")) {
             textPesquisa.setText("Pesquisa: " + pesquisa);
             llPesquisa.setVisibility(View.VISIBLE);
         } else {
@@ -128,7 +137,7 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
         rvUsuarios.setLayoutManager(new LinearLayoutManager(this));
         rvUsuarios.setHasFixedSize(true);
 
-        usuarioAdapter = new UsuarioAdapter(usuarioList);
+        usuarioAdapter = new UsuarioAdapter(usuarioList, this);
 
         rvUsuarios.setAdapter(usuarioAdapter);
     }
@@ -168,13 +177,13 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     usuarioList.clear();
 
-                    for(DataSnapshot ds : snapshot.getChildren()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         Usuario usuario = ds.getValue(Usuario.class);
 
-                        if(usuario != null) {
+                        if (usuario != null) {
                             if (!usuario.getId().equals(FirebaseHelper.getIdFirebase())) {
                                 usuarioList.add(usuario);
                             }
@@ -196,6 +205,15 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void OnClickListener(Usuario usuario) {
+        Intent intent = new Intent(this, TransferenciaConfirmaActivity.class);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("transferencia", transferencia);
+
+        startActivity(intent);
     }
 
 }

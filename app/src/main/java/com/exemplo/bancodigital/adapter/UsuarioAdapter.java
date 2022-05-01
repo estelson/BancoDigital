@@ -19,8 +19,11 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.MyViewHo
 
     private final List<Usuario> usuarioList;
 
-    public UsuarioAdapter(List<Usuario> usuarioList) {
+    private final OnClick onClick;
+
+    public UsuarioAdapter(List<Usuario> usuarioList, OnClick onClick) {
         this.usuarioList = usuarioList;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -41,11 +44,19 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.MyViewHo
         } else {
             holder.imagemUsuario.setImageResource(R.drawable.ic_user);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            onClick.OnClickListener(usuario);
+        });
     }
 
     @Override
     public int getItemCount() {
         return usuarioList.size();
+    }
+
+    public interface OnClick {
+        void OnClickListener(Usuario usuario);
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
