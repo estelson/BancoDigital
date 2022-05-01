@@ -82,7 +82,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.santalu.maskara.widget.MaskEditText
                     android:id="@+id/edtTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +93,10 @@
                     android:inputType="number"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
-                    android:theme="@style/Theme.EditText"/>
+                    android:theme="@style/Theme.EditText"
+                    app:mask="(__) _____-____"
+                    app:maskCharacter="_"
+                    app:maskStyle="completable"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

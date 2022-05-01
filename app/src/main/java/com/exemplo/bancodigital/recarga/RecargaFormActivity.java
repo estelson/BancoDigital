@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.exemplo.bancodigital.R;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.Locale;
 
@@ -34,7 +36,7 @@ public class RecargaFormActivity extends AppCompatActivity {
 
     private CurrencyEditText edtValor;
 
-    private EditText edtTelefone;
+    private MaskEditText edtTelefone;
 
     private AlertDialog dialog;
 
@@ -49,56 +51,59 @@ public class RecargaFormActivity extends AppCompatActivity {
 
         iniciaComponentes();
 
-        //recuperaUsuario();
+        recuperaUsuario();
 
         configToolbar();
     }
 
-//    private void recuperaUsuario() {
-//        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
-//                .child("usuarios")
-//                .child(FirebaseHelper.getIdFirebase());
-//
-//        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                usuario = snapshot.getValue(Usuario.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void recuperaUsuario() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(FirebaseHelper.getIdFirebase());
+
+        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usuario = snapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     public void validaRecarga(View view) {
         double valorRecarga = (double) edtValor.getRawValue() / 100;
+        String numeroTelefone = edtTelefone.getUnMasked().trim();
 
-        String numeroTelefone = edtTelefone.getText().toString().trim();
+        double saldoContaUsuario = usuario.getSaldo();
 
-        if(valorRecarga > 15) {
-            if(!numeroTelefone.isEmpty()) {
-                if(numeroTelefone.length() == 11) {
-                    // TODO: Validar saldo na conta ao validar a recarga de celular
+        if(saldoContaUsuario >= valorRecarga) {
+            if (valorRecarga >= 15) {
+                if (!numeroTelefone.isEmpty()) {
+                    if (numeroTelefone.length() == 11) {
+                        progressBar.setVisibility(View.VISIBLE);
 
-                    ocultarTeclado();
+                        ocultarTeclado();
 
-                    progressBar.setVisibility(View.VISIBLE);
-
-                    salvarExtrato(valorRecarga, numeroTelefone);
+                        salvarExtrato(valorRecarga, numeroTelefone);
+                    } else {
+                        showDialog("Informe um número de telefone válido");
+                    }
                 } else {
-                    showDialog("Informe um número de telefone válido");
+                    showDialog("Informe o número de telefone para recarga");
                 }
             } else {
-                showDialog("Informe o número de telefone para recarga");
+                showDialog("Digite um valor maior que R$ 15,00");
             }
         } else {
-            showDialog("Digite um valor maior que R$ 15,00");
+            showDialog("Saldo em conta insuficiente para efetuar a recarga");
         }
     }
 
-    private void salvarExtrato(Double valorRecarga, String numeroTelefone) {
+    private void salvarExtrato(double valorRecarga, String numeroTelefone) {
         Extrato extrato = new Extrato();
         extrato.setOperacao("RECARGA");
         extrato.setValor(valorRecarga);
@@ -128,14 +133,14 @@ public class RecargaFormActivity extends AppCompatActivity {
         recarga.setValor(extrato.getValor());
         recarga.setTelefone(extrato.getNumeroTelefone());
 
-        DatabaseReference depositoRef = FirebaseHelper.getDatabaseReference()
+        DatabaseReference recargaRef = FirebaseHelper.getDatabaseReference()
                 .child("recargas")
                 .child(recarga.getId());
 
-        depositoRef.setValue(recarga).addOnCompleteListener(task -> {
+        recargaRef.setValue(recarga).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                DatabaseReference updateDepositoRef = depositoRef.child("data");
-                updateDepositoRef.setValue(ServerValue.TIMESTAMP);
+                DatabaseReference updateRecargaRef = recargaRef.child("data");
+                updateRecargaRef.setValue(ServerValue.TIMESTAMP);
 
                 usuario.setSaldo(usuario.getSaldo() - recarga.getValor());
                 usuario.atualizarSaldo();

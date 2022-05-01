@@ -62,4 +62,8 @@ dependencies {
     // https://github.com/square/picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Format text fields without getting affected by input filters
+    // https://github.com/santalu/maskara
+    implementation 'com.github.santalu:maskara:1.0.0'
+
 }
