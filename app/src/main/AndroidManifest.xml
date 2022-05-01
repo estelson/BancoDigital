@@ -13,13 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigital">
         <activity
+            android:name=".transferencia.TransferenciaFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".recarga.RecargaReciboActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".recarga.RecargaFormActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".usuario.MinhaContaActivity"
             android:exported="false"
