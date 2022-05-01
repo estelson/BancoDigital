@@ -19,6 +19,7 @@ import com.exemplo.bancodigital.deposito.DepositoReciboActivity;
 import com.exemplo.bancodigital.helper.FirebaseHelper;
 import com.exemplo.bancodigital.model.Deposito;
 import com.exemplo.bancodigital.model.Extrato;
+import com.exemplo.bancodigital.model.Transferencia;
 import com.exemplo.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,9 +58,17 @@ public class TransferenciaFormActivity extends AppCompatActivity {
             if (valorTransferencia > 0) {
                 ocultarTeclado();
 
-                progressBar.setVisibility(View.VISIBLE);
+                Transferencia transferencia = new Transferencia();
+                transferencia.setValor(valorTransferencia);
 
-                salvarExtrato(valorTransferencia);
+                Intent intent = new Intent(this, TransferirUsuariosActivity.class);
+                intent.putExtra("transferencia", transferencia);
+
+                startActivity(intent);
+
+                //progressBar.setVisibility(View.VISIBLE);
+
+                //salvarExtrato(valorTransferencia);
             } else {
                 showDialog("Digite um valor maior que 0");
             }
@@ -84,7 +93,7 @@ public class TransferenciaFormActivity extends AppCompatActivity {
                 DatabaseReference updateExtratoRef = extratoRef.child("data");
                 updateExtratoRef.setValue(ServerValue.TIMESTAMP);
 
-                salvarTransferencia(extrato);
+                //salvarTransferencia(extrato);
             } else {
                 showDialog("Erro ao efetuar a transferência. Motivo: " + task.getException().getMessage());
             }

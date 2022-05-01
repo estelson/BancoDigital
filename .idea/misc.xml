@@ -6,12 +6,14 @@
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/bg_alert_dialog.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/bg_btn.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/bg_edit.xml" value="0.23" />
+        <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/bg_edit_pesquisa.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_back.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_celular_login.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_deposito.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_email_login.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_logo.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_notifications.xml" value="0.23" />
+        <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_pesquisa.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_senha_login.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_user.xml" value="0.23" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/drawable/ic_user_blue.xml" value="0.23" />
@@ -26,6 +28,8 @@
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/activity_recuperar_conta.xml" value="0.3528205128205128" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/activity_splash.xml" value="0.35833333333333334" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/activity_transferencia_form.xml" value="0.35833333333333334" />
+        <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/activity_transferir_usuarios.xml" value="0.35833333333333334" />
+        <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/adapter_usuario.xml" value="0.35833333333333334" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/divisor.xml" value="0.35833333333333334" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/layout_dialog_info.xml" value="0.35885416666666664" />
         <entry key="..\:/Documents/Projects/Android/Cursos/Udemy/BancoDigital/app/src/main/res/layout/toolbar.xml" value="0.35833333333333334" />

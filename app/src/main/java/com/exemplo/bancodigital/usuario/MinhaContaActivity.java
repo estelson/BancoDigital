@@ -162,11 +162,13 @@ public class MinhaContaActivity extends AppCompatActivity {
     private void configDados() {
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
-        Picasso.get().load(usuario.getUrlImagem()).placeholder(R.drawable.loading).into(imagemPerfil);
-
         edtNome.setText(usuario.getNome());
         edtTelefone.setText(usuario.getTelefone());
         edtEmail.setText(usuario.getEmail());
+
+        if(usuario.getUrlImagem() != null) {
+            Picasso.get().load(usuario.getUrlImagem()).placeholder(R.drawable.loading).into(imagemPerfil);
+        }
 
         progressBar.setVisibility(View.GONE);
     }
