@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,6 +36,10 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
     private RecyclerView rvUsuarios;
 
     private EditText edtPesquisa;
+    private LinearLayout llPesquisa;
+    private TextView textPesquisa;
+    private TextView textLimpar;
+    private String pesquisa = "";
 
     private TextView textInfo;
 
@@ -50,6 +57,71 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
         configRv();
 
         recuperaUsuario();
+
+        configPesquisa();
+
+        configCliques();
+    }
+
+    private void configCliques() {
+        textLimpar.setOnClickListener(v -> {
+            pesquisa = "";
+
+            configFiltro();
+
+            recuperaUsuario();
+
+            ocultarTeclado();
+        });
+    }
+
+    private void configPesquisa() {
+        edtPesquisa.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                ocultarTeclado();
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                pesquisa = v.getText().toString();
+                if(!pesquisa.equals("")) {
+                    configFiltro();
+
+                    pesquisaUsuarios();
+                } else {
+                    recuperaUsuario();
+
+                    configFiltro();
+                }
+            }
+
+            return false;
+        });
+    }
+
+    private void pesquisaUsuarios() {
+        for(Usuario usuario : new ArrayList<>(usuarioList)) {
+            if(!usuario.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
+                usuarioList.remove(usuario);
+            }
+        }
+
+        if(usuarioList.isEmpty()) {
+            textInfo.setText("Nenhum usuário encontrado com este nome");
+        }
+
+        progressBar.setVisibility(View.GONE);
+
+        usuarioAdapter.notifyDataSetChanged();
+    }
+
+    private void configFiltro() {
+        if(!pesquisa.equals("")) {
+            textPesquisa.setText("Pesquisa: " + pesquisa);
+            llPesquisa.setVisibility(View.VISIBLE);
+        } else {
+            textPesquisa.setText("");
+            llPesquisa.setVisibility(View.GONE);
+        }
     }
 
     private void configRv() {
@@ -80,6 +152,9 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
         rvUsuarios = findViewById(R.id.rvUsuarios);
 
         edtPesquisa = findViewById(R.id.edtPesquisa);
+        llPesquisa = findViewById(R.id.llPesquisa);
+        textPesquisa = findViewById(R.id.textPesquisa);
+        textLimpar = findViewById(R.id.textLimpar);
 
         textInfo = findViewById(R.id.textInfo);
 
@@ -94,6 +169,8 @@ public class TransferirUsuariosActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
+                    usuarioList.clear();
+
                     for(DataSnapshot ds : snapshot.getChildren()) {
                         Usuario usuario = ds.getValue(Usuario.class);
 
